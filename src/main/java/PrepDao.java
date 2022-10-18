@@ -1,6 +1,5 @@
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,6 +11,6 @@ public class PrepDao {
     JdbcTemplate jdbcTemplate;
 
     public List<PrepDto> getPrepData() {
-        return jdbcTemplate.query("select * from book", new PrepMapper());
+        return jdbcTemplate.query("select * from property", new PrepMapper());
     }
 }
