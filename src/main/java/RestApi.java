@@ -5,13 +5,14 @@ import jakarta.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Component
 @Path("/")
 public class RestApi {
 
-        @Autowired
+        @Inject
         PrepDao prepDao;
 
         @GET
@@ -19,5 +20,12 @@ public class RestApi {
         @Produces({MediaType.APPLICATION_JSON})
         public List<PrepDto> getPrepInfo() {
             return prepDao.getPrepData();
+        }
+
+        @GET
+        @Path("/test")
+        @Produces({MediaType.APPLICATION_JSON})
+        public PrepDto getTestMessage() {
+                return prepDao.getTest();
         }
 }
