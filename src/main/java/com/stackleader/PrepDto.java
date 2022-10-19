@@ -1,5 +1,6 @@
-import lombok.*;
+package com.stackleader;
 
+import lombok.*;
 
 @Data
 @Builder
