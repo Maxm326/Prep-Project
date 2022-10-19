@@ -16,9 +16,6 @@ public class PrepDao {
     @Resource(lookup = "java:jboss/datasources/pmq-dev-db")
     DataSource dataSource;
 
-    //How to do prepared statements on javax.dataSource
-
-
     public List<PrepDto> getPrepData() throws SQLException {
         Connection con = null;
         ResultSet resultSet;

@@ -11,20 +11,20 @@ import java.util.List;
 @Path("/")
 public class RestApi {
 
-        @Inject
-        PrepDao prepDao;
+    @Inject
+    PrepDao prepDao;
 
-        @GET
-        @Path("properties")
-        @Produces({MediaType.APPLICATION_JSON})
-        public List<PrepDto> getPrepInfo() throws SQLException {
-            return prepDao.getPrepData();
-        }
+    @GET
+    @Path("properties")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<PrepDto> getPrepInfo() throws SQLException {
+        return prepDao.getPrepData();
+    }
 
-        @GET
-        @Path("test")
-        @Produces({MediaType.APPLICATION_JSON})
-        public PrepDto getTestMessage() {
-                return prepDao.getTest();
-        }
+    @GET
+    @Path("test")
+    @Produces({MediaType.APPLICATION_JSON})
+    public PrepDto getTestMessage() {
+        return prepDao.getTest();
+    }
 }

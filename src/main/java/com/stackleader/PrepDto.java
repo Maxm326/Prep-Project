@@ -7,6 +7,6 @@ import lombok.*;
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class PrepDto {
-        String uuid;
-        String name;
+    String uuid;
+    String name;
 }
