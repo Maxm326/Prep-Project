@@ -17,28 +17,18 @@ public class PrepDao {
     DataSource dataSource;
 
     public List<PrepDto> getPrepData() throws SQLException {
-        Connection con = null;
-        ResultSet resultSet;
-        PreparedStatement ps;
+
         List<PrepDto> properties = new ArrayList<>();
         String sqlQuery = "SELECT name, uuid FROM property";
 
-        try {
-            con = dataSource.getConnection("stackleader", "stackleader");
-            con.setAutoCommit(false);
-            ps = con.prepareStatement(sqlQuery);
-            resultSet = ps.executeQuery();
-
+        try (Connection con = dataSource.getConnection("stackleader", "stackleader");
+             PreparedStatement ps = con.prepareStatement(sqlQuery);
+             ResultSet resultSet = ps.executeQuery()) {
             while (resultSet.next()) {
                 PrepDto prepDto = new PrepDto(resultSet.getString("uuid"), resultSet.getString("name"));
                 properties.add(prepDto);
             }
-        } finally {
-            if (con != null) {
-                con.close();
-            }
         }
-
         return properties;
     }
 
