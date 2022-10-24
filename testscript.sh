@@ -12,8 +12,8 @@ cp jboss-eap-7.4 /opt/jboss-eap-7.4.0/
 cd /opt/jboss-eap-7.4.0/jboss-eap-7.4/bin || exit
 ./add-user.sh -u 'admin' -p 'password' -g 'admin'
 
-# start standalone instance in separate terminal (nohup) on port 9081
-nohup ./standalone.sh -b 0.0.0.0 -Djboss.socket.binding.port-offset=1001 &
+# start standalone instance in separate terminal (nohup) on port 8091
+nohup ./standalone.sh -b 0.0.0.0 -Djboss.socket.binding.port-offset=11 &
 
 #start jboss-cli and connect
 ./jboss-cli.sh
@@ -25,7 +25,10 @@ module add --name=com.postgresql --resources=postgresql-42.2.5.jar --dependencie
 #register jdbc module
 /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=com.postgresql,driver-class-name=org.postgresql.Driver)
 
+#FIXME: does docker need to be installed and configured also ?
+
 #add postgresql datasource
 data-source add --name=PostgresqlDB --jndi-name=java:jboss/datasources/PostgresqlDB --driver-name=postgresql  --connection-url=jdbc:postgresql://localhost:5432/PostgresqlDB
 
 #deploy .war file
+deployment deploy-file webapp.prep.war
