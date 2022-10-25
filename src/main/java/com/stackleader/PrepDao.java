@@ -22,11 +22,12 @@ public class PrepDao {
         String sqlQuery = "SELECT name, uuid FROM property";
 
         try (Connection con = dataSource.getConnection("stackleader", "stackleader");
-             PreparedStatement ps = con.prepareStatement(sqlQuery);
-             ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                PrepDto prepDto = new PrepDto(resultSet.getString("uuid"), resultSet.getString("name"));
-                properties.add(prepDto);
+             PreparedStatement ps = con.prepareStatement(sqlQuery)) {
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    PrepDto prepDto = new PrepDto(resultSet.getString("uuid"), resultSet.getString("name"));
+                    properties.add(prepDto);
+                }
             }
         }
         return properties;
