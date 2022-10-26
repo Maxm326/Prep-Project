@@ -1,6 +1,7 @@
 package com.stackleader;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Startup;
 import javax.ejb.Timeout;
@@ -26,11 +27,20 @@ public class EJBScheduler {
     @PostConstruct
     public void intialize() {
         //FIXME: change back to 5 minutes (200000)
-        timerService.createTimer(0, 4000 ,"Every 5 minutes timer with no delay");
+        timerService.createTimer(0, 4000, "Every 5 minutes timer with no delay");
     }
 
     @Timeout
     public void EJBTimeout(Timer timer) throws SQLException {
         LOGGER.info("************** Result Set Count = " + prepDao.getPrepData().size());
+    }
+
+    @PreDestroy
+    public void stop() {
+        System.out.println("EJB Timer: Stop timers.");
+        for (Timer timer : timerService.getTimers()) {
+            System.out.println("Stopping timer: " + timer.getInfo());
+            timer.cancel();
+        }
     }
 }
