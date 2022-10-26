@@ -29,7 +29,7 @@ public class PrepDao {
                 properties.add(prepDto);
             }
         }
-        return properties;
+        return properties; //TODO: Get the count of this list every 5 minutes
     }
 
     public PrepDto getTest() {
