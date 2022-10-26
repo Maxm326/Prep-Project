@@ -3,29 +3,25 @@ package com.stackleader;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.Startup;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.ejb.TimerService;
+import javax.ejb.*;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
 @Startup
-@Singleton
+@Stateless
 public class EJBScheduler {
-
-    private static final Logger LOGGER = Logger.getLogger(EJBScheduler.class.toString());
 
     @Inject
     PrepDao prepDao;
 
     @Resource
-    TimerService timerService;
+    private TimerService timerService;
+
+    private static final Logger LOGGER = Logger.getLogger(EJBScheduler.class.toString());
 
     @PostConstruct
-    public void intialize() {
+    public void initialize() {
         //FIXME: change back to 5 minutes (200000)
         timerService.createTimer(0, 4000, "Every 5 minutes timer with no delay");
     }
