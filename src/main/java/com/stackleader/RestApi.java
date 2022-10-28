@@ -1,6 +1,5 @@
 package com.stackleader;
 
-import com.stackleader.model.JPAModel;
 import com.stackleader.service.JPARegistration;
 
 import javax.inject.Inject;
@@ -30,7 +29,7 @@ public class RestApi {
     @GET
     @Path("jpa-properties")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<JPAModel> getPrepResults() {
+    public List<PrepDto> getPrepResults() {
         return jpaRegistration.findAllPropertiesWithJpql();
     }
 
